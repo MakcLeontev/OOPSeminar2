@@ -1,6 +1,7 @@
 package ru.gb.Oseminar.service;
 
 import ru.gb.Oseminar.data.Student;
+import ru.gb.Oseminar.data.Teacher;
 import ru.gb.Oseminar.data.User;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 public class UserService implements DataService{
     private final List<User>users;
+    private static long id=0;
 
     public UserService() {
         this.users = new ArrayList<>();
@@ -16,17 +18,29 @@ public class UserService implements DataService{
 
     @Override
     public void createUser(String firstName, String lastName, String patronymic) {
-        long id = 0L;
-        for (User item:users) {
-            if(item instanceof Student){
-                if(id>((Student)item).getStudentsID()){
-                    id=((Student)item).getStudentsID();
-                }
-            }
-        }
+        //id = 0L;
+//        for (User item:users) {
+//            if(item instanceof Student){
+//                if(id>((Student)item).getStudentsID()){
+//                    id=((Student)item).getStudentsID();
+//                }
+//            }
+//        }
         this.users.add(new Student(firstName,lastName,patronymic,++id));
-
     }
+    @Override
+    public void createUser(String firstName, String lastName, String patronymic,long teacherID){
+//        long id = 0L;
+//        for (User item:users) {
+//            if(item instanceof Teacher){
+//                if(id>((Teacher)item).getTeacherID()){
+//                    id=((Teacher)item).getTeacherID();
+//                }
+//            }
+//        }
+        this.users.add(new Teacher(firstName,lastName,patronymic,teacherID));
+    }
+
 
     @Override
     public List<User> getAll() {

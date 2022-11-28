@@ -15,4 +15,14 @@ public class Teacher extends User{
     public void setTeacherID(long teacherID) {
         this.teacherID = teacherID;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "firstName='" + getFirstName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
+                ", patronymic='" + getPatronymic() + '\'' +
+                "teacherID=" + teacherID +
+                '}';
+    }
 }

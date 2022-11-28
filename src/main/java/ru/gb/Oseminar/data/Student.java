@@ -15,4 +15,14 @@ public class Student extends User{
     public void setStudentsID(long studentsID) {
         this.studentsID = studentsID;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "firstName='" + getFirstName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
+                ", patronymic='" + getPatronymic() + '\'' +
+                "studentsID=" + studentsID +
+                '}';
+    }
 }
