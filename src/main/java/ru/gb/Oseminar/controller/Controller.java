@@ -1,14 +1,12 @@
 package ru.gb.Oseminar.controller;
 
-import ru.gb.Oseminar.data.Student;
-import ru.gb.Oseminar.data.StudyGroup;
-import ru.gb.Oseminar.data.Teacher;
-import ru.gb.Oseminar.data.User;
+import ru.gb.Oseminar.data.*;
 import ru.gb.Oseminar.service.StudyGroupService;
 import ru.gb.Oseminar.service.UserService;
 import ru.gb.Oseminar.view.StudentView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Controller {
@@ -16,16 +14,15 @@ public class Controller {
     private final StudentView studentView = new StudentView();
     private StudyGroupService studyGroupService = new StudyGroupService();
 
-    public void createUser(String firstName, String lastName, String patronymic){
-        userService.createUser(firstName,lastName, patronymic);
+    public void createUser(String firstName, String lastName, String patronymic,long groupID){
+        userService.createStudent(firstName,lastName, patronymic, groupID);
     }
-    public void createTeacher(String firstName, String lastName, String patronymic, long teacherID){
-        userService.createUser(firstName, lastName, patronymic, teacherID);
+    public void createTeacher(String firstName, String lastName, String patronymic, long teacherID, long groupID){
+        userService.createTeacher(firstName, lastName, patronymic, teacherID, groupID);
     }
     public void createTimeTable(Teacher teacher, List<Student>studentList){
         studyGroupService.formationStudyGroup(teacher,studentList);
-        //System.out.println(studyGroupService.getStudyGroupList());
-        studentView.showOnConsole(studyGroupService.getStudyGroupList());
+        //studentView.showOnConsole(studyGroupService.getStudyGroupList());
     }
 
     public List<Student> showAllStudents() {
@@ -38,22 +35,42 @@ public class Controller {
         }
         return students;
     }
-    public Teacher showTeacher(){
+    public List<Student> showOneGroupStudents(int numberGroup){
+        List<Student>students = new ArrayList<>();
         List<User> users = userService.getAll();
-        List<Teacher>teachers= new ArrayList<>();
+        for (User item:users) {
+            if (item instanceof Student){
+                if (((Student)item).getStudentGroupID() == numberGroup){
+                    students.add((Student) item);
+                }
+            }
+        }
+        return students;
+    }
+    public Teacher showTeacherGroup(int numberGroup){
+        List<User> users = userService.getAll();
         for (User item:users) {
             if (item instanceof Teacher){
-                teachers.add((Teacher) item);
-                return (Teacher) item;
+                if (((Teacher) item).getTeacherGroupID() == numberGroup){
+                    return (Teacher) item;
+                }
             }
         }
         return null;
     }
-
-//        studentView.showConsole(users);
-
-//    public void showStudyGroup(List<Student>students){
+//    public void showSortStudentsINStudyGroup(List<Student>students){
 //        Collections.sort(students,new StudyGroupComparator());
-//        studentView.sh
+//        studentView.showStudents(students);
 //    }
+    public List<StudyGroup> getStudyGroup(){
+        return studyGroupService.getStudyGroupList();
+    }
+    public void sortAllStudyGroup(List<StudyGroup>studyGroups){
+        List<Student>students = new ArrayList<>();
+        for (StudyGroup item:studyGroups) {
+            students.addAll(item.getStudentList());
+        }
+        Collections.sort(students,new StudyGroupComparator());
+        studentView.showStudents(students);
+    }
 }

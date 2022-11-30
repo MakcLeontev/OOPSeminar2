@@ -18,6 +18,10 @@ public class UserService implements DataService{
 
     @Override
     public void createUser(String firstName, String lastName, String patronymic) {
+
+    }
+
+    public void createStudent(String firstName, String lastName, String patronymic, long groupID) {
         //id = 0L;
 //        for (User item:users) {
 //            if(item instanceof Student){
@@ -26,10 +30,10 @@ public class UserService implements DataService{
 //                }
 //            }
 //        }
-        this.users.add(new Student(firstName,lastName,patronymic,++id));
+        this.users.add(new Student(firstName,lastName,patronymic,++id,groupID));
     }
-    @Override
-    public void createUser(String firstName, String lastName, String patronymic,long teacherID){
+
+    public void createTeacher(String firstName, String lastName, String patronymic,long teacherID, long teacherGroupID ){
 //        long id = 0L;
 //        for (User item:users) {
 //            if(item instanceof Teacher){
@@ -38,7 +42,7 @@ public class UserService implements DataService{
 //                }
 //            }
 //        }
-        this.users.add(new Teacher(firstName,lastName,patronymic,teacherID));
+        this.users.add(new Teacher(firstName,lastName,patronymic,teacherID,teacherGroupID));
     }
 
 

@@ -2,10 +2,20 @@ package ru.gb.Oseminar.data;
 
 public class Student extends User{
     private long studentsID;
+    private long studentGroupID;
 
-    public Student(String firstName, String lastName, String patronymic, long studentsID) {
+    public Student(String firstName, String lastName, String patronymic, long studentsID,long studentGroupID) {
         super(firstName, lastName, patronymic);
         this.studentsID = studentsID;
+        this.studentGroupID = studentGroupID;
+    }
+
+    public long getStudentGroupID() {
+        return studentGroupID;
+    }
+
+    public void setStudentGroupID(long studentGroupID) {
+        this.studentGroupID = studentGroupID;
     }
 
     public long getStudentsID() {
@@ -22,7 +32,8 @@ public class Student extends User{
                 "firstName='" + getFirstName() + '\'' +
                 ", lastName='" + getLastName() + '\'' +
                 ", patronymic='" + getPatronymic() + '\'' +
-                "studentsID=" + studentsID +
+                ", studentsID=" + studentsID +
+                ", GroupID=" + studentGroupID +
                 '}';
     }
 }

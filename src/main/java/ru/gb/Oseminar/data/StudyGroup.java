@@ -13,7 +13,10 @@ public class StudyGroup {
     public StudyGroup(Teacher teacher, List<Student> studentList) {
         this.teacher = teacher;
         this.studentList = studentList;
-        groupID = ++groupID;
+//        groupID = ++groupID;
+//        for (Student item:studentList) {
+//            item.setStudentGroupID(groupID);
+//        }
     }
 
     public static long getGroupID() {
@@ -41,7 +44,7 @@ public class StudyGroup {
         return "StudyGroup{" +
                 "teacher=" + teacher +
                 ", studentList=" + studentList +
-                ", groupID=" +groupID+
+//                ", groupID=" +groupID+
                 '}';
     }
 
